@@ -22,10 +22,10 @@
 			</setHeader>
 			<choice id="_choice2">
 				<when id="_when4">
-					<simple>${in.body.tipo} == 'CC'</simple>
+					<simple>${in.body.tipo} == 'CD'</simple>
 					<log id="_log12" logName="wspagosLog" message="AUTH in production mode..." />
 					<setHeader headerName="hnumero" id="_setHeader1">
-						<constant>1</constant>
+						<constant>2</constant>
 					</setHeader>
 					<log id="_log1" message="ENTRO POR CEDULA"></log>
 				</when>
