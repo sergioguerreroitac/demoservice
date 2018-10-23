@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: List
+items:
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    name: consulta-saldo-service
+  spec:
+    tags:
+    - from:
+        kind: ImageStreamImage
+        name: consulta-saldo-service@sha256:d9477fe63072f9580db7131850401caa88474df4ab16872c174ba424edd9f5fb
+        namespace: mydemo
+      name: latest

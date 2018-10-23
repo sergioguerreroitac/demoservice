@@ -1,0 +1,10 @@
+{
+  "users":		  [${exchange.properties.usersCompany}],  
+  "directories":	[${exchange.properties.directories}],
+ 
+  "permissions":	[ {"channel" : "HTTPS", "createDirectory" : "true", "deleteDirectory": "true", "listFile" : "true", "readFile" : "true", "writeFile": "true", 					  "deleteFile": "true", "renameFile" : "true"},
+					  {"channel" : "FTP", "createDirectory" : "true", "deleteDirectory": "true", "listFile" : "true", "readFile" : "true", "writeFile": "true", 					  "deleteFile": "true", "renameFile" : "true"},
+					  {"channel" : "FTPS", "createDirectory" : "true", "deleteDirectory": "true", "listFile" : "true", "readFile" : "true", "writeFile": "true", 					  "deleteFile": "true", "renameFile" : "true"},
+					  {"channel" : "SFTP", "createDirectory" : "true", "deleteDirectory": "true", "listFile" : "true", "readFile" : "true", "writeFile": "true", 					  "deleteFile": "true", "renameFile" : "true"}
+					]
+}
