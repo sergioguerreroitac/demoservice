@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: List
+items:
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    name: consulta-producto-service-rest
+  spec:
+    tags:
+    - from:
+        kind: ImageStreamImage
+        name: consulta-producto-service-rest@sha256:65fd24311d5f33bce5f974988882fda7eaf9d323c4ebd5fc6ffa70e079b947a1
+        namespace: mydemo
+      name: latest
