@@ -19,7 +19,7 @@
             </setHeader>
             <choice id="_choice2">
                 <when id="_when4">
-                    <simple>${in.body.tipo} == 'CC'</simple>
+                    <simple>${in.body.tipo} == 'CE'</simple>
                     <log id="_log12" logName="wspagosLog" message="AUTH in production mode..."/>
                     <setHeader headerName="hnumero" id="_setHeader1">
                         <constant>4</constant>
