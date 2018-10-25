@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:cxf="http://camel.apache.org/schema/cxf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+	<cxf:cxfEndpoint address="http://0.0.0.0:8183/cxf/order"
+		id="orderEndpoint" serviceClass="org.fusesource.camel.ws.SaldoEndpoint" />
+
+	<bean id="generateSession" class="org.fusesource.camel.process.GenerateSession" />
+
+	<camelContext id="consulta-saldo" trace="false"
+		xmlns="http://camel.apache.org/schema/spring">
+		<route customId="true" id="consulta-service-soap" streamCache="true">
+			<from id="_from1" uri="cxf:bean:orderEndpoint" />
+			<process ref="generateSession" />
+			<setBody id="_setBody1">
+				<simple>${in.body[0]}</simple>
+			</setBody>
+			<log id="_log1" logName="consulta-service"
+				message="IDSession:${headers.session} message: message:Inicio servicio" />
+			<setHeader headerName="tipo" id="_setHeader7">
+				<simple>${in.body.tipo}</simple>
+			</setHeader>
+			<setHeader headerName="numero" id="_setHeader8">
+				<simple>${body.numero}</simple>
+			</setHeader>
+			<choice id="_choice2">
+				<when id="_when4">
+					<simple>${in.body.tipo} == 'CC'</simple>
+					<log id="_log12" logName="consulta-service"
+						message="IDSession:${headers.session} message: entro por cedula" />
+					<setHeader headerName="hnumero" id="_setHeader1">
+						<constant>2</constant>
+					</setHeader>
+					<log id="_log1" message="ENTRO POR CEDULA" />
+				</when>
+				<when id="_when4">
+					<simple>${in.body.tipo} == 'TI'</simple>
+					<log id="_log3" logName="consulta-service"
+						message="IDSession:${headers.session} message: entro por TI" />
+					<setHeader headerName="hnumero" id="_setHeader1">
+						<constant>2</constant>
+					</setHeader>
+
+				</when>
+				<otherwise id="_otherwise3">
+					<setHeader headerName="hnumero" id="_setHeader1">
+						<constant>3</constant>
+					</setHeader>
+					<log id="_log4" logName="consulta-service"
+						message="IDSession:${headers.session} message: no llego tipo de documento" />
+				</otherwise>
+			</choice>
+			<log id="_log20" logName="consulta-service"
+				message="IDSession:${headers.session} message: ${body}" />
+			<setHeader headerName="CamelHttpMethod" id="_setHeader1">
+				<constant>GET</constant>
+			</setHeader>
+			<setHeader headerName="Content-Type" id="_setHeader2">
+				<constant>application/json;charset=UTF-8</constant>
+			</setHeader>
+			<doTry>
+				<toD id="_to2"
+					uri="http://consulta-producto-service-rest-mydemo.23.96.115.114.nip.io/employeeservice/employees/${header.hnumero}/${headers.session}?bridgeEndpoint=true" />
+				<log id="_log8" logName="consulta-service"
+					message="IDSession:${headers.session} message: respuesta del servicio rest ${body}" />
+				<marshal id="_marshal1">
+					<jaxb contextPath="org.fusesource.camel.model" />
+				</marshal>
+				<transform id="_transform1">
+					<constant>1000000</constant>
+				</transform>
+				<log id="_log8" logName="consulta-service"
+					message="IDSession:${headers.session} message: Termino servicio" />
+				<doCatch>
+					<exception>java.lang.Exception</exception>
+					<transform id="_transform1">
+						<constant>-1</constant>
+					</transform>					
+					<log id="_log8" logName="consulta-service"
+					message="IDSession:${headers.session} message: no se pudo conectar al servicio CODERROR:404" />
+				</doCatch>
+				<doFinally>
+					<log id="_log8" logName="consulta-service"
+						message="IDSession:${headers.session} message: Termino la llamada" />
+				</doFinally>
+			</doTry>
+		</route>
+	</camelContext>
+</beans>

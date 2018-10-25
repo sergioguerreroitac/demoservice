@@ -1,0 +1,8 @@
+{
+ "directoryPath":"${exchange.properties.directoryPath}", 
+ "userName":"${headers.username}",  
+ "size":"${headers.size}",  
+ "copyFatherPermissions" : "${headers.copyFatherPermissions}",   
+ "expirationTime" : "${headers.expirationTime}",  
+ "recursiveErased" : "${headers.recursiveErased}" 	 
+ } 
