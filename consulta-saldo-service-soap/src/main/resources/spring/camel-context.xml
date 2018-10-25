@@ -60,7 +60,7 @@
 			</setHeader>
 			<doTry>
 				<toD id="_to2"
-					uri="http://consulta-producto-service-rest-mydemo.23.96.115.114.nip.io/employeeservice/employees/${header.hnumero}/${headers.session}?bridgeEndpoint=true" />
+					uri="http://consulta-producto-service-rest-mydemo.13.66.35.35.nip.io/employeeservice/employees/${header.hnumero}/${headers.session}?bridgeEndpoint=true" />
 				<log id="_log8" logName="consulta-service"
 					message="IDSession:${headers.session} message: respuesta del servicio rest ${body}" />
 				<marshal id="_marshal1">
