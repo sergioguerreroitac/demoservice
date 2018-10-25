@@ -22,6 +22,6 @@ public interface FolRangosService {
     @GET
     @Consumes({ MediaType.APPLICATION_JSON + "; charset=UTF-8" })
     @Produces({ MediaType.APPLICATION_JSON + "; charset=UTF-8" })
-    @Path("/employees/{id}/{session}")
-    public String getRangos(@PathParam("id") String id,@PathParam("session") String session);
+    @Path("/employees/{id}/{sessio}")
+    public String getRangos(@PathParam("id") String id,@PathParam("sessio") String session);
 }

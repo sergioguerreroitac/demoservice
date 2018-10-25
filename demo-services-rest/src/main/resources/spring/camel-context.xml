@@ -27,7 +27,7 @@
 			<log id="_log8" logName="consulta-service"
 						message="IDSession:${headers.session} message: Inicio llamada ${in.body}" />
 			<setBody id="route-setBody">
-				<simple>0550123456789456</simple>
+				<simple>0550123456789457</simple>
 			</setBody>			
 			<log id="_log8" logName="consulta-service"
 						message="IDSession:${headers.session} message: Termino la llamada al servicio rest" />
